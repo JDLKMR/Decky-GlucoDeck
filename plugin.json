@@ -1,0 +1,11 @@
+{
+  "name": "GlucoDeck",
+  "author": "JD",
+  "flags": [],
+  "api_version": 1,
+  "publish": {
+    "tags": ["utility"],
+    "description": "Shows your current Dexcom glucose reading on the Steam Deck via Dexcom Share.",
+    "image": ""
+  }
+}
