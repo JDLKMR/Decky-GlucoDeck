@@ -1,6 +1,6 @@
 {
   "name": "glucodeck",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Shows your current Dexcom glucose reading on the Steam Deck via Dexcom Share.",
   "type": "module",
   "scripts": {

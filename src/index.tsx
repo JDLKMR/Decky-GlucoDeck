@@ -1,6 +1,7 @@
 import {
   ButtonItem,
   DropdownItem,
+  Field,
   PanelSection,
   PanelSectionRow,
   SliderField,
@@ -257,6 +258,23 @@ function TrendGraph({
   );
 }
 
+// A row the controller can land on, so the D-pad can scroll back up to it.
+function FocusStop({ children }: { children: any }) {
+  return (
+    <Field
+      {...({
+        focusable: true,
+        onActivate: () => {},
+        childrenLayout: "below",
+        childrenContainerWidth: "max",
+        bottomSeparator: "none",
+      } as any)}
+    >
+      {children}
+    </Field>
+  );
+}
+
 function Content() {
   const [settings, setSettings] = useState<Settings | null>(null);
   const [reading, setReading] = useState<Reading | null>(null);
@@ -318,12 +336,14 @@ function Content() {
     <>
       <PanelSection title="Glucose">
         <PanelSectionRow>
-          <ReadingDisplay reading={reading} settings={settings} now={now} />
+          <FocusStop>
+            <ReadingDisplay reading={reading} settings={settings} now={now} />
+          </FocusStop>
         </PanelSectionRow>
         <PanelSectionRow>
-          <div style={{ width: "100%" }}>
+          <FocusStop>
             <TrendGraph history={reading?.history ?? []} settings={settings} now={now} />
-          </div>
+          </FocusStop>
         </PanelSectionRow>
         <PanelSectionRow>
           <SliderField
@@ -346,7 +366,7 @@ function Content() {
         </PanelSectionRow>
         <PanelSectionRow>
           <ButtonItem layout="below" disabled={busy} onClick={onRefresh}>
-            Refresh now
+            Refresh
           </ButtonItem>
         </PanelSectionRow>
       </PanelSection>
@@ -416,12 +436,12 @@ function Content() {
         </PanelSectionRow>
         <PanelSectionRow>
           <ButtonItem layout="below" disabled={busy} onClick={onSave}>
-            Save and connect
+            Save
           </ButtonItem>
         </PanelSectionRow>
         <PanelSectionRow>
           <ButtonItem layout="below" disabled={busy} onClick={onForget}>
-            Forget credentials
+            Forget Credentials
           </ButtonItem>
         </PanelSectionRow>
       </PanelSection>
